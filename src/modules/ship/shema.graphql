@@ -1,0 +1,5 @@
+type Ship implements Node {
+  id: ID!
+  name: String
+  createdAt: DateTime
+}

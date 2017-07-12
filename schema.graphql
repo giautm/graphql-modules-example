@@ -1,0 +1,118 @@
+schema {
+  query: RootQuery
+  mutation: RootMutation
+}
+
+# A date string, such as 2007-12-03, compliant with the `full-date` format
+# outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for
+# representation of dates and times using the Gregorian calendar.
+scalar Date
+
+# A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the
+# `date-time` format outlined in section 5.6 of the RFC 3339 profile of the ISO
+# 8601 standard for representation of dates and times using the Gregorian calendar.
+scalar DateTime
+
+type Faction implements Node {
+  id: ID!
+  name: String
+  ships(
+    # Returns the first n elements from the list.
+    first: Int
+
+    # Returns the elements in the list that come after the specified cursor.
+    after: String
+
+    # Returns the last n elements from the list.
+    last: Int
+
+    # Returns the elements in the list that come before the specified cursor.
+    before: String
+  ): ShipConnection
+}
+
+input IntroduceShipInput {
+  shipName: String!
+  factionId: ID!
+  clientMutationId: String
+}
+
+type IntroduceShipPayload {
+  ship: Ship
+  faction: Faction
+  clientMutationId: String
+}
+
+# The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
+scalar JSON
+
+# An object with an ID
+interface Node {
+  # The id of the object.
+  id: ID!
+}
+
+# Information about pagination in a connection.'
+type PageInfo {
+  # When paginating forwards, the cursor to continue.
+  endCursor: String
+
+  # When paginating forwards, are there more items?
+  hasNextPage: Boolean!
+
+  # When paginating backwards, are there more items?
+  hasPreviousPage: Boolean!
+
+  # When paginating backwards, the cursor to continue.
+  startCursor: String
+}
+
+type RootMutation {
+  introduceShip(input: IntroduceShipInput!): IntroduceShipPayload
+}
+
+type RootQuery {
+  rebels: Faction
+  empire: Faction
+
+  # Fetches an object given its ID
+  node(
+    # The ID of an object
+    id: ID!
+  ): Node
+
+  # Fetches objects given their IDs
+  nodes(
+    # The IDs of objects
+    ids: [ID!]!
+  ): [Node]!
+}
+
+type Ship implements Node {
+  id: ID!
+  name: String
+}
+
+# A connection to a list of items.
+type ShipConnection {
+  # A list of edges.
+  edges: [ShipEdge]
+
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+}
+
+# An edge in a connection.
+type ShipEdge {
+  # A cursor for use in pagination.
+  cursor: String!
+
+  # The item at the end of the edge
+  node: Ship
+}
+
+# A time string at UTC, such as 10:15:30Z, compliant with the `full-time` format
+# outlined in section 5.6 of the RFC 3339profile of the ISO 8601 standard for
+# representation of dates and times using the Gregorian calendar.
+scalar Time
+

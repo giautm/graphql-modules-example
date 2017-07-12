@@ -1,0 +1,22 @@
+# OSX
+#
+.DS_Store
+
+# Build
+#
+build/
+
+# node.js
+#
+node_modules/
+npm-debug.log
+newrelic_agent.log
+
+# Unit test
+#
+coverage/
+
+# Environment configs
+#
+.env
+*.log
