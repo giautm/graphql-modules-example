@@ -4,7 +4,6 @@ import {
   globalIdResolver,
 } from 'graphql-relay-tools';
 
-import relay from '../relay';
 import ship from '../ship';
 
 import { getEmpire, getRebels, getShip } from '../../data';
@@ -38,5 +37,5 @@ export default () => ({
     empire: Faction
   `,
   resolvers,
-  modules: [relay, ship],
+  modules: [ship],
 });

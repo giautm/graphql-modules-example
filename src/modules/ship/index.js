@@ -1,10 +1,9 @@
 import {
-  globalIdResolver,
   connectionDefinitions,
+  globalIdResolver,
   mutationWithClientMutationId,
 } from 'graphql-relay-tools';
 
-import relay from '../relay';
 import schema from './shema.graphql';
 
 import { createShip, getFaction, getShip } from '../../data';
@@ -56,5 +55,4 @@ export default () => ({
     introduceShip${mutationField}
   `,
   resolvers,
-  modules: [relay],
 });

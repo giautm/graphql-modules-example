@@ -5,6 +5,8 @@ import {
   GraphQLDateTime,
 } from 'graphql-iso-date';
 
+import relay from './relay';
+
 export default () => ({
   schema: `
     scalar JSON
@@ -18,4 +20,5 @@ export default () => ({
     Time: GraphQLTime,
     DateTime: GraphQLDateTime,
   },
+  modules: [relay],
 });
