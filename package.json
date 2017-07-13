@@ -1,7 +1,6 @@
 {
-  "name": "viec-news",
+  "name": "graphql-modules-example",
   "version": "0.0.1",
-  "description": "Viec News",
   "main": "src/server.js",
   "license": "MIT",
   "scripts": {
